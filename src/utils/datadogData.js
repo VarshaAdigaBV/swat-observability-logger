@@ -1,7 +1,7 @@
 const UAParser = require('ua-parser-js')
 var ua_mobile = false;
 
-const datadogData = function(body, userAgent){
+const datadogDataInsight = function(body, userAgent){
     const ua = new UAParser(userAgent)
     if(ua.getDevice().type == "mobile") {
         ua_mobile = true;
@@ -25,9 +25,25 @@ const datadogData = function(body, userAgent){
         "swat.ua_mobile":ua_mobile,
         "epochSecond": Math.floor(new Date().getTime()/1000.0)
     }  
+    return data;
+}
 
+const datadogDataError = function(body){
+    let data = {
+        "swat.client.name": body.tags.client,
+        "swat.logger": body.logger,
+        "swat.platform": body.platform,
+        "swat.log.level": body.level,
+        "swat.exception": body.exception,
+        "swat.sdk.name": body.sdk.name,
+        "swat.sdk.version": body.sdk.version,
+        "swat.component.name": body.tags.component,
+        "swat.component.release": "4.0.0",
+        "swat.browser.name": body.browser.name,
+        "swat.browser.version": body.browser.version,
+    }
     return data;
 }
 
 
-module.exports =  datadogData
+module.exports =  { datadogDataInsight, datadogDataError }
