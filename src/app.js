@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const logger = require('./utils/logger')
-const { datadogDataInsight, datadogDataError } = require('./utils/datadogData')
+const { datadogDataInsight, datadogDataError, datadogDataApp2 } = require('./utils/datadogData')
 const analyticsRequest = require('./service/analyticsRequest')
 const {endpoint} = require('./const/constants')
 
@@ -21,14 +21,7 @@ app.post('/logger', (req, res) => {
 }) 
 //Approach 2(in-progress)
 app.post('/logger/url', (req,res)=> {
-    var url = req.body.url;
-    let params = (new URL(url)).searchParams;
-    if(params.get('r_batch')){
-        var batch = params.get('r_batch').replace(/,/g, "&").replace(/:/g, "=");//setting r_batch in query param format to make later processing easier
-        params.set('r_batch',batch)
-        var batchUrl = params.get('r_batch').match(/\(([^()]*)\)/g).map(function($0) { return $0.substring(1,$0.length-1) })//extracting each event from batch
-        console.log( new URLSearchParams(batchUrl[0]) )
-    }
+    datadogDataApp2(req.body.url,req.get('user-agent'))
     res.send({"Logged":"yes"})
 })
 
