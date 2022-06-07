@@ -33,7 +33,28 @@ var swat = {
   elapsedMs:"",
   dc:"",
   displaySegment:"",
-  context:""
+  context:"",
+  categoryId:"",
+  subjectType:"",
+  subjectId:"",
+  contentType:"",
+  brand:"",
+  pages:"",
+  numReviews:"",
+  numRatingsOnlyReviews:"",
+  percentageRecommend:"",
+  avgRating:"",
+  ref:"",
+  href :"",
+  res:"",
+  cookies:"",
+  lang:"",
+  charset:"",
+  geo:"",
+  initialContent :"",
+  sourceVersion:"",
+  magpieJsVersion:"",
+  sourceproductid:""
 }
 
 module.exports =  {
