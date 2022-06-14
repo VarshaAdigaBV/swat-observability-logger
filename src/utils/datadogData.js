@@ -3,9 +3,12 @@ const {swat} = require('../const/constants')
 
 const datadogDataInsight = function(body, userAgent){
     const ua = new UAParser(userAgent)
-    if(ua.getDevice().type == "mobile") {
+    console.log(swat.ua_mobile, "checking default value")
+    if(ua.getDevice().type === "mobile") {
+        console.log(ua.getDevice().type, "checking device type")
         swat.ua_mobile = true;
     }
+    console.log(swat.ua_mobile, 'checking parser')
     swat.client.name = body.client
     swat.bvProduct.name = body.bvProduct
     swat.bvProduct.version =  body.bvProductVersion,
